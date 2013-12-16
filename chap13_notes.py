@@ -65,6 +65,9 @@ def choose_rand(arg):
 	return random.choice(list(d.keys()))
 	
 def choose_weighted(arg):
+	'''Returns a random value from a 
+	given histogram. Weighted by the 
+	number of times it appears.'''
 	d = histogram(arg)
 
 # http://stackoverflow.com/questions/3679694/a-weighted-version-of-random-choice?lq=1

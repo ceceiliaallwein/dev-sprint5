@@ -4,29 +4,78 @@
 
 # Exercise 12.4 - anagrams
 
-'''
 
-1
-Write a program that reads a word list from a file (see Section 9.1) and prints all the sets of words that are anagrams.
 
-Here is an example of what the output might look like:
-['deltas', 'desalt', 'lasted', 'salted', 'slated', 'staled']
-['retainers', 'ternaries']
-['generating', 'greatening']
-['resmelts', 'smelters', 'termless']
+def sort_string(string):
+    '''Creates a sorted string.'''
+    return ''.join(sorted(string))
 
-Hint: you might want to build a dictionary that maps from a set of letters to a list of words that can be spelled with those letters. The question is, how can you represent the set of letters in a way that can be used as a key?
-'''
 
 def read_file(filename): 
-	storage = dict()
+	'''Reads a given text file and creates 
+	a dictionary of sorted strings and their 
+	anagrams.
+
+	keys = sorted string
+	value = list of anagrams 
+
+	'''
+	storage = {}
 	with open(filename) as fin: 
 		for line in fin: 
-			line = line.strip()
-			storage[line] = storage.get(line,0) + 1
+			# removes formatting, incl. trailing spaces and linebreaks
+			line = line.strip().lower()
+			# determines if the sorted string is a unique key
+			if sort_string(line) not in storage.keys(): 
+				# initializes a value list with a singleton
+				storage[sort_list(line)] = [line]
+			else: 
+				# appends an anagram to the value list
+				storage[sort_string(line)].append(line)
 		return storage
 
-print read_file('words.txt')
+# result = read_file('words.txt')
+
+
+def anagrams(word,filename):
+	'''Reads a given text file and returns
+	anagrams for a given word.
+
+	key = given string
+	value = list of anagrams 
+	'''
+	# converts given word to a sorted string
+	x = sort_string(word).lower()
+	# initializes an empty list to store anagrams
+	l = []
+	with open(filename) as fin: 
+		for line in fin: 
+			# removes formatting, incl. trailing spaces + line breaks
+			line = line.strip().lower()
+			# converts line in text file to a sorted string
+			y = sort_string(line)
+			# determines if given word and line in text file match
+			if x == y: 
+				# appends matched string (not sorted string!) to list of anagrams
+				l.append(line)
+		return word,l 
+
+print anagrams('theist','words.txt')
+
+
+
+def search(word,anagram_dict): 
+	x = sorted(word)
+	x = ''.join(x)
+	return anagram_dict[x]
+
+
+# def match(filename): 
+	
+
+
+
+
 
 
 

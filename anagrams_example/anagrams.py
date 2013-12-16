@@ -37,6 +37,7 @@ def all_anagrams(filename):
     return d
 
 
+
 def print_anagram_sets(d):
     """Prints the anagram sets in d.
 
